@@ -11,7 +11,7 @@
 */
 
 //
-int print_board(int choice, char board[10][10])
+int print_board(int choice, int safety,  char board[10][10])
 {
   switch(choice)
   {
@@ -34,10 +34,26 @@ int print_board(int choice, char board[10][10])
     for(col = 0; col < 10; col++)
     {
       printf("|");
-      if(board[row][col] == 'W' || board[row][col] == 'S') { printf("\033[0;34m"); }
+      if(board[row][col] == 'W') { printf("\033[0;34m"); }
+      else if(board[row][col] == 'S') { printf("\033[0;35m"); }
       else if(board[row][col] == 'M') { printf("\033[0;33m"); }
       else if(board[row][col] == 'H') { printf("\033[0;31m"); }
-      printf(" %c ", board[row][col]);
+      if(safety)
+      {
+        printf(" %c ", board[row][col]);
+      }
+      else
+      {
+        if(board[row][col] == 'S') 
+        { 
+          printf("\033[0;34m"); 
+          printf(" %c ", 'W');
+        }
+        else
+        {
+          printf(" %c ", board[row][col]);
+        }
+      }
       printf("\033[0m");
     }
     printf("|\n");
@@ -48,10 +64,10 @@ int print_board(int choice, char board[10][10])
 	return 0;
 }
 
-int print_boards(int difficulty, char board_1[10][10], char board_2[10][10])
+int print_boards(int difficulty, int safety, char board_1[10][10], char board_2[10][10])
 {
-  print_board(difficulty, board_1);
-  print_board(-difficulty, board_2);
+  print_board(difficulty, safety, board_1);
+  print_board(-difficulty, safety, board_2);
 
   return 0;
 }
@@ -59,9 +75,9 @@ int print_boards(int difficulty, char board_1[10][10], char board_2[10][10])
 /*
 int main()
 {
-  char board[10][10] = {{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}, {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}, {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}, {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}, {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}, {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}, {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}, {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}, {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}, {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}};
-  print_board(-1, board);
+  char board[10][10] = {{'W', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}, {'S', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}, {'M', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}, {'H', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}, {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}, {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}, {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}, {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}, {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}, {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}};
+  print_board(-1, 0, board);
   printf("\na\n");
-  print_boards(1, board, board);
+  print_board(1, 1, board);
 }
 */
