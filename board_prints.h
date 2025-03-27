@@ -3,8 +3,11 @@
 #ifndef BOARD_PRINTS_H
 #define BOARD_PRINTS_H
 
-int print_board(int choice, int safety, char board[10][10]);
-int print_boards(int difficulty, int safety, char board_1[10][10], char board_2[10][10]);
+#define COLUMNS 10
+#define ROWS 10
+
+int print_board(int choice, int safety, char board[ROWS][COLUMNS]);
+int print_boards(int difficulty, int safety, char board_1[ROWS][COLUMNS], char board_2[ROWS][COLUMNS]);
 
 #define MAX_BUFFER_Size 1024
 

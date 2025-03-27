@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include "board_prints.h"
 
+#define COLUMNS 10
+#define ROWS 10
+
 /*
 	File: board_prints.c
 	Author: Kaeden Daly
@@ -11,7 +14,7 @@
 */
 
 //
-int print_board(int choice, int safety,  char board[10][10])
+int print_board(int choice, int safety, char board[ROWS][COLUMNS])
 {
   switch(choice)
   {
@@ -25,13 +28,22 @@ int print_board(int choice, int safety,  char board[10][10])
     break;
   }
   int row, col;
-  printf("   - A | B | C | D | E | F | G | H | I | J -\n");
-  for(row = 0; row < 10; row++)
+  printf("   - A ");
+  for(col = 1; col < COLUMNS; col++)
   {
-    printf("--------------------------------------------\n");
-    if(row != 9) { printf(" %d ", row + 1); }
+    printf("| %c ", (char)(65 + col));
+  }
+  printf("-\n");
+  for(row = 0; row < ROWS; row++)
+  {
+    for(col = -1; col < COLUMNS; col++)
+    {
+      printf("----");
+    }
+    printf("\n");
+    if(row <= 8) { printf(" %d ", row + 1); }
     else { printf("%d ", row + 1); } 
-    for(col = 0; col < 10; col++)
+    for(col = 0; col < COLUMNS; col++)
     {
       printf("|");
       if(board[row][col] == 'W') { printf("\033[0;34m"); }
@@ -58,13 +70,17 @@ int print_board(int choice, int safety,  char board[10][10])
     }
     printf("|\n");
   }
-  printf("--------------------------------------------\n");
+  for(col = -1; col < COLUMNS; col++)
+  {
+    printf("----");
+  }
+  printf("\n");
   printf("\n\n\n");
 
 	return 0;
 }
 
-int print_boards(int difficulty, int safety, char board_1[10][10], char board_2[10][10])
+int print_boards(int difficulty, int safety, char board_1[ROWS][COLUMNS], char board_2[ROWS][COLUMNS])
 {
   print_board(difficulty, safety, board_1);
   print_board(-difficulty, safety, board_2);
@@ -75,7 +91,15 @@ int print_boards(int difficulty, int safety, char board_1[10][10], char board_2[
 /*
 int main()
 {
-  char board[10][10] = {{'W', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}, {'S', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}, {'M', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}, {'H', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}, {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}, {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}, {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}, {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}, {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}, {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}};
+  char board[ROWS][COLUMNS];
+  int row, col;
+  for(row = 0; row < ROWS; row++)
+  {
+    for(col = 0; col < COLUMNS; col++)
+    {
+      board[row][col] = (char)(65 + row + col);
+    }
+  }
   print_board(-1, 0, board);
   printf("\na\n");
   print_board(1, 1, board);
