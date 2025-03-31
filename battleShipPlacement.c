@@ -6,11 +6,20 @@
 #define COLUMNS 10
 #define ROWS 10
 
-void clearScreen()
+/*
+	File: shipPlacement.c
+	Author: Erik Dunlap
+	Course: CS125
+	Assignement: Final Project
+	Date: 03/31/25
+	References: N/A
+*/
+
+/*void clearScreen()
 {
   const char *CLEAR_SCREEN_ANSI = "\e[1;1H\e[2J";
   write(STDOUT_FILENO, CLEAR_SCREEN_ANSI, 12);
-}
+}*/
 
 int validIntInput()
 {
@@ -48,14 +57,14 @@ int aiShipPlacement(int currentShipSize, char array[ROWS][COLUMNS])
     while (unplacedShip)
     {
         validPlacement=1;
-        selectedRow= rand()%10;
-        selectedColumn= rand()%10;
+        selectedRow= rand()%ROWS;
+        selectedColumn= rand()%COLUMNS;
         directionVar= rand()%2 + 1;
         switch (directionVar)
         {
         case 1:
         {
-            if (selectedColumn + currentShipSize > 9)
+            if (selectedColumn + currentShipSize > ROWS-1)
             {
                 break;
             }
@@ -78,7 +87,7 @@ int aiShipPlacement(int currentShipSize, char array[ROWS][COLUMNS])
         }
         case 2:
         {
-            if (selectedRow + currentShipSize > 9)
+            if (selectedRow + currentShipSize > COLUMNS)
             {
                 break;
             }
@@ -120,22 +129,22 @@ int shipPlacement(int currentShipSize, char array[ROWS][COLUMNS])
         {
             printf("Which row to start?\n");
             selectedRow= validIntInput() - 1;
-            if (selectedRow > 9 || selectedRow < 0)
+            if (selectedRow > ROWS-1 || selectedRow < 0)
             {
                 printf("Invalid Number\n");
             }
         }
-        while (selectedRow > 9 || selectedRow < 0);
+        while (selectedRow > ROWS-1 || selectedRow < 0);
         do
         {
             printf("Which column?\n");
             selectedColumn= validColInput();
-            if (selectedColumn > 9 || selectedColumn < 0)
+            if (selectedColumn > COLUMNS-1 || selectedColumn < 0)
             {
                 printf("Invalid Number\n");
             }
         }
-        while (selectedColumn > 9 || selectedColumn < 0);
+        while (selectedColumn > COLUMNS-1 || selectedColumn < 0);
         do
         {
             printf("Which direction?\n(1 for horizontal)\n(2 for vertical)\n");
@@ -150,7 +159,7 @@ int shipPlacement(int currentShipSize, char array[ROWS][COLUMNS])
         {
         case 1:
         {
-            if (selectedColumn + currentShipSize > 10)
+            if (selectedColumn + currentShipSize > COLUMNS)
             {
                 printf("Invalid Placement\n");
                 break;
@@ -176,7 +185,7 @@ int shipPlacement(int currentShipSize, char array[ROWS][COLUMNS])
         }
         case 2:
         {
-            if (selectedRow + currentShipSize > 10)
+            if (selectedRow + currentShipSize > COLUMNS)
             {
                 printf("Invalid Placement\n");
                 break;
@@ -218,7 +227,7 @@ int fullPlacementLoop(char array[ROWS][COLUMNS])
     shipPlacement(3, array);
     printf("Place your Patrol Boat: Size 2\n");
     shipPlacement(2, array);
-    clearScreen();
+    //clearScreen();
     return 0;
 }
 
