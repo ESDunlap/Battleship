@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <unistd.h>
+#include "placementLoops.h"
 #define COLUMNS 10
 #define ROWS 10
 
