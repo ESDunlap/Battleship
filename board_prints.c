@@ -1,8 +1,7 @@
-#include <stdio.h>
 #include "board_prints.h"
 
-#define COLUMNS 10
-#define ROWS 10
+//#define COLUMNS 10
+//#define ROWS 10
 
 /*
 	File: board_prints.c

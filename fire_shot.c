@@ -1,8 +1,7 @@
-#include <stdio.h>
 #include "fire_shot.h"
 
-#define COLUMNS 10
-#define ROWS 10
+//#define COLUMNS 10
+//#define ROWS 10
 
 /*
 	File: fire_shot.c
@@ -36,7 +35,6 @@ int fire_and_check(int rowB, int colB, char board[ROWS][COLUMNS])
 {
   if(fire(rowB, colB, board))
   {
-    printf("\nBoard piece has already been hit\n");
     return -1;
   }
   int row, col;

@@ -3,6 +3,8 @@
 #ifndef BOARD_PRINTS_H
 #define BOARD_PRINTS_H
 
+#include <stdio.h>
+
 #define COLUMNS 10
 #define ROWS 10
 

@@ -3,6 +3,8 @@
 #ifndef FIRE_SHOT_H
 #define FIRE_SHOT_H
 
+#include <stdio.h>
+
 #define COLUMNS 10
 #define ROWS 10
 
