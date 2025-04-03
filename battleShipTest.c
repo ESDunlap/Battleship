@@ -357,35 +357,212 @@ int aiLevel1Turn(char userBoard[ROWS][COLUMNS])
   }
 }
 
-/*int aiLevel2Turn(char userBoard[ROWS][COLUMNS], int* searchRow, int* searchColumn, int* currentDirection)
+int aiLevel2Turn(char userBoard[ROWS][COLUMNS], int* searchRow, int* searchColumn, int* directionSearch)
 {
-  int selectedRow;
-  int selectedColumn;
+  int row;
+  int col;
+  int selectedRow= -1;
+  int selectedColumn= -1;
   int currentStatus;
-  if(searchRow== -1)
+  int directionChoice;
+  if(*searchRow != -1)
   {
-    while(1)
+    if(*directionSearch== 0) //if no current ship direction found
     {
-      selectedRow= rand()%10;
-      selectedColumn= rand()%10;
-      currentStatus= fire_and_check(selectedRow, selectedColumn, userBoard);
-      if (currentStatus== 0)
+      for (row = *searchRow - 1; (row < *searchRow + 2 && row < ROWS); row++)
       {
-        &searchRow= selectedRow;
-        &searchColumn= selectedColumn;
-        return 0;
+        if (userBoard[row][*searchColumn] == 'W')
+        {
+          selectedRow= row;
+          selectedColumn= *searchColumn;
+          directionChoice= 1;
+          break;
+        }
+        if (userBoard[row][*searchColumn] == 'S')
+        {
+          selectedRow= row;
+          selectedColumn= *searchColumn;
+          directionChoice= 1;
+          break;
+        }
       }
-      if (currentStatus== 1)
+      if (selectedRow == -1)
       {
-        return 1;
+        for (col = *searchColumn - 1; (col < *searchColumn + 2 && col < COLUMNS); col++)
+        {
+          if (userBoard[*searchRow][col] == 'W')
+          {
+            selectedRow= *searchRow;
+            selectedColumn= col;
+            directionChoice= 2;
+            break;
+          }
+          if (userBoard[*searchRow][col] == 'S')
+          {
+            selectedRow= *searchRow;
+            selectedColumn= col;
+            directionChoice= 2;
+            break;
+          }
+        }
+      }
+      if (selectedRow != -1)
+      {
+        currentStatus= fire_and_check(selectedRow, selectedColumn, userBoard);
+        if (currentStatus== 0)
+        {
+          if (userBoard[selectedRow][selectedColumn]== 'H')
+          {
+            *directionSearch= directionChoice;
+          }
+          return 0;
+        }
+        if (currentStatus== 1)
+        {
+          return 1;
+        }
       }
     }
+    if(*directionSearch== 1)
+    {
+      for (row = *searchRow; (row < ROWS); row++)
+      {
+        if (userBoard[row][*searchColumn] == 'M')
+        {
+          break;
+        }
+        if (userBoard[row][*searchColumn] == 'W')
+        {
+          selectedRow= row;
+          selectedColumn= *searchColumn;
+          break;
+        }
+        if (userBoard[row][*searchColumn] == 'S')
+        {
+          selectedRow= row;
+          selectedColumn= *searchColumn;
+          break;
+        }
+      }
+      if (selectedRow == -1)
+      {
+        for (row = *searchRow; row > -1; row--)
+        {
+          if (userBoard[row][*searchColumn] == 'M')
+          {
+            break;
+          }
+          if (userBoard[row][*searchColumn] == 'W')
+          {
+            selectedRow= row;
+            selectedColumn= *searchColumn;
+            break;
+          }
+          if (userBoard[row][*searchColumn] == 'S')
+          {
+            selectedRow= row;
+            selectedColumn= *searchColumn;
+            break;
+          }
+        }
+      }
+      if (selectedRow != -1)
+      {
+        currentStatus= fire_and_check(selectedRow, selectedColumn, userBoard);
+        if (currentStatus== 0)
+        {
+          return 0;
+        }
+        if (currentStatus== 1)
+        {
+          return 1;
+        }
+      }
+      *searchRow= -1;
+      *searchColumn= -1;
+      *directionSearch= 0;
+    }
+    if(*directionSearch== 2)
+    {
+      for (col = *searchColumn; (col < COLUMNS); col++)
+      {
+        if (userBoard[*searchRow][col] == 'M')
+        {
+          break;
+        }
+        if (userBoard[*searchRow][col] == 'W')
+        {
+          selectedRow= *searchRow;
+          selectedColumn= col;
+          break;
+        }
+        if (userBoard[*searchRow][col] == 'S')
+        {
+          selectedRow= *searchRow;
+          selectedColumn= col;
+          break;
+        }
+      }
+      if (selectedRow == -1)
+      {
+        for (col = *searchColumn; col > -1; col--)
+        {
+          if (userBoard[*searchRow][col] == 'M')
+          {
+            break;
+          }
+          if (userBoard[*searchRow][col] == 'W')
+          {
+            selectedRow= *searchRow;
+            selectedColumn= col;
+            break;
+          }
+          if (userBoard[*searchRow][col] == 'S')
+          {
+            selectedRow= *searchRow;
+            selectedColumn= col;
+            break;
+          }
+        }
+      }
+      if (selectedRow != -1)
+      {
+        currentStatus= fire_and_check(selectedRow, selectedColumn, userBoard);
+        if (currentStatus== 0)
+        {
+          return 0;
+        }
+        if (currentStatus== 1)
+        {
+          return 1;
+        }
+      }
+      *searchRow= -1;
+      *searchColumn= -1;
+      *directionSearch= 0;
+    }
   }
-  else
+
+  while(1)
   {
-    if(currentDirection
+    selectedRow= rand()%10;
+    selectedColumn= rand()%10;
+    currentStatus= fire_and_check(selectedRow, selectedColumn, userBoard);
+    if (currentStatus== 0)
+    {
+      if(userBoard[selectedRow][selectedColumn] == 'H')
+      {
+        *searchRow= selectedRow;
+        *searchColumn= selectedColumn;
+      }
+      return 0;
+    }
+    if (currentStatus== 1)
+    {
+    return 1;
+    }
   }
-}*/
+}
 
 int aiLevel3Turn(char userBoard[ROWS][COLUMNS], int* searchRow, int* searchColumn)
 {
@@ -396,27 +573,63 @@ int aiLevel3Turn(char userBoard[ROWS][COLUMNS], int* searchRow, int* searchColum
   int currentStatus;
   if(*searchRow != -1)
   {
-    printf("Test");
-    printf("%d", *searchRow);
-    for (row = (*searchRow)-1; (row < (*searchRow)+2 && row < ROWS ); row++)
+    for (row = *searchRow; (row < ROWS); row++)
     {
-      printf("%d", row);
       if (userBoard[row][*searchColumn] == 'S')
       {
         selectedRow= row;
         selectedColumn= *searchColumn;
-        printf("Test2");
+        break;
+      }
+      if (userBoard[row][*searchColumn] != 'H')
+      {
         break;
       }
     }
     if (selectedRow == -1)
     {
-      for (col = (*searchColumn)-1; (col < (*searchColumn)+2 && col < COLUMNS); col++)
+      for (col = *searchColumn; col < COLUMNS; col++)
       {
         if (userBoard[*searchRow][col] == 'S')
         {
           selectedRow= *searchRow;
           selectedColumn= col;
+          break;
+        }
+        if (userBoard[*searchRow][col] != 'H')
+        {
+          break;
+        }
+      }
+    }
+    if (selectedRow == -1)
+    {
+      for (row = *searchRow; row > -1; row--)
+      {
+        if (userBoard[row][*searchColumn] == 'S')
+        {
+          selectedRow= row;
+          selectedColumn= *searchColumn;
+          break;
+        }
+        if (userBoard[row][*searchColumn] != 'H')
+        {
+          break;
+        }
+      }
+    }
+    if (selectedRow == -1)
+    {
+      for (col = (*searchColumn); col > -1; col--)
+      {
+        if (userBoard[*searchRow][col] == 'S')
+        {
+          selectedRow= *searchRow;
+          selectedColumn= col;
+          break;
+        }
+        if (userBoard[*searchRow][col] != 'H')
+        {
           break;
         }
       }
@@ -426,8 +639,6 @@ int aiLevel3Turn(char userBoard[ROWS][COLUMNS], int* searchRow, int* searchColum
       currentStatus= fire_and_check(selectedRow, selectedColumn, userBoard);
       if (currentStatus== 0)
       {
-        *searchRow= selectedRow;
-        *searchColumn= selectedColumn;
         return 0;
       }
       if (currentStatus== 1)
@@ -501,6 +712,7 @@ int main()
     int gameEnded= 0;
     int searchRow= -1;
     int searchCol= -1;
+    int directionChoice= 0;
 
     int row;
     int col;
