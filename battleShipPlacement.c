@@ -1,11 +1,4 @@
-#include <ctype.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <time.h>
-#include <unistd.h>
-#include "placementLoops.h"
-#define COLUMNS 10
-#define ROWS 10
+#include "battleShipPlacement.h"
 
 /*
 	File: shipPlacement.c
@@ -16,11 +9,11 @@
 	References: N/A
 */
 
-/*void clearScreen()
+void clearScreen()
 {
   const char *CLEAR_SCREEN_ANSI = "\e[1;1H\e[2J";
   write(STDOUT_FILENO, CLEAR_SCREEN_ANSI, 12);
-}*/
+}
 
 int validIntInput()
 {
@@ -38,23 +31,20 @@ int validColInput()
     char userInput;
     int userNumber;
     while (getchar()!= '\n');
-    while (scanf("%c", &userInput) == 0)
+    while (scanf(" %c", &userInput) == 0)
     {
         printf("Invalid Character\n");
         while (getchar()!= '\n');
     }
+    //while (getchar()!= '\n');
     userInput= tolower(userInput);
     userNumber = (int) userInput - 97;
     return userNumber;
 }
+
 int aiShipPlacement(int currentShipSize, char array[ROWS][COLUMNS])
 {
-    int unplacedShip= 1;
-    int selectedRow;
-    int selectedColumn;
-    int directionVar;
-    int i;
-    int validPlacement;
+    int unplacedShip= 1, selectedRow, selectedColumn, directionVar, i, validPlacement;
     while (unplacedShip)
     {
         validPlacement=1;
@@ -123,6 +113,9 @@ int shipPlacement(int currentShipSize, char array[ROWS][COLUMNS])
     int directionVar;
     int i;
     int validPlacement;
+    
+    print_board(0, 1, array);
+    
     while (unplacedShip)
     {
         validPlacement=1;
@@ -155,7 +148,7 @@ int shipPlacement(int currentShipSize, char array[ROWS][COLUMNS])
                 printf("Invalid Number\n");
             }
         }
-        while (directionVar > 2 || selectedRow < 1);
+        while (directionVar > 2 || directionVar < 1);
         switch (directionVar)
         {
         case 1:
@@ -218,17 +211,17 @@ int shipPlacement(int currentShipSize, char array[ROWS][COLUMNS])
 
 int fullPlacementLoop(char array[ROWS][COLUMNS]) 
 {
-    printf("Place your Carrier: Size 5\n");
+    printf("\n\nPlace your Carrier: Size 5\n");
     shipPlacement(5, array);
-    printf("Place your Battleship: Size 4\n");
+    printf("\n\nPlace your Battleship: Size 4\n");
     shipPlacement(4, array);
-    printf("Place your Destroyer: Size 3\n");
+    printf("\n\nPlace your Destroyer: Size 3\n");
     shipPlacement(3, array);
-    printf("Place your Submarine: Size 3\n");
+    printf("\n\nPlace your Submarine: Size 3\n");
     shipPlacement(3, array);
-    printf("Place your Patrol Boat: Size 2\n");
+    printf("\n\nPlace your Patrol Boat: Size 2\n");
     shipPlacement(2, array);
-    //clearScreen();
+    clearScreen();
     return 0;
 }
 
@@ -243,27 +236,15 @@ int aiPlacementLoop(char array[ROWS][COLUMNS])
     return 0;
 }
 
-int main()
+
+void createArray(char array[ROWS][COLUMNS])
 {
-    int row;
-    int col;
-    char matrix[10][10];
-    char aiMatrix[10][10];
+    int row, col;
     for (row=0; row < 10; row++)
     {
         for(col=0; col < 10; col++)
         {
-            matrix[row][col] = 'W';
+            array[row][col] = 'W';
         }
     }
-    for (row=0; row < 10; row++)
-    {
-        for(col=0; col < 10; col++)
-        {
-            aiMatrix[row][col] = 'W';
-        }
-    }
-    aiPlacementLoop(aiMatrix);
-    fullPlacementLoop(matrix);
-    return 0;
 }

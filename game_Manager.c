@@ -1,12 +1,10 @@
-#include "game_Manager.h"
-#include "battleShipPlacement.h"
-#include "fire_input.h"
+#include "game_manager.h"
 
 //#define COLUMNS 10
 //#define ROWS 10
 
 /*
-	File: game_Manager.c
+	File: game_manager.c
 	Authors: Kaeden Daly, Erik Dunlap
 	Course: CS125
 	Assignement: Final Project
@@ -32,9 +30,11 @@ int main()
   printf("...: ");
   while(scanf("%d", &difficulty) != 1 || difficulty < 1 || difficulty > 6)
   {
+  	while (getchar()!= '\n');
     printf("Error: Invalid input\n");
     printf("Please Try Again: ");
   }
+  while (getchar()!= '\n');
   
   char player1[ROWS][COLUMNS];
   char player2[ROWS][COLUMNS];
@@ -45,6 +45,9 @@ int main()
   switch(difficulty)
   {
     case 1:
+    	createArray(player1);
+			createArray(player2);
+			
       printf("Player 1: \n\n");
       fullPlacementLoop(player1);
       

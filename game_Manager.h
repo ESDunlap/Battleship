@@ -1,4 +1,4 @@
-//File: game_Manager.h
+//File: game_manager.h
 
 #ifndef GAME_MANAGER_H
 #define GAME_MANAGER_H
