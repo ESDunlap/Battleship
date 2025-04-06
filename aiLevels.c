@@ -1,3 +1,5 @@
+#include "aiLevels.h"
+
 #include <ctype.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -14,44 +16,6 @@
 	Date: 04/05/25
 	References: N/A
 */
-
-int fire(int row, int col, char board[ROWS][COLUMNS])
-{
-  if(board[row][col] == 'M' || board[row][col] == 'H')
-  {
-    return 1; 
-  }
-  if(board[row][col] == 'W')
-  {
-    board[row][col] = 'M';
-  }
-  else if(board[row][col] == 'S')
-  {
-    board[row][col] = 'H';
-  }
-  return 0;
-}
-
-//Will call the fire function, return -1 if failed to fire, detect if there are any remaining ships (Yes-0, No-1)
-int fire_and_check(int rowB, int colB, char board[ROWS][COLUMNS])
-{
-  if(fire(rowB, colB, board))
-  {
-    return -1;
-  }
-  int row, col;
-  for(row = 0; row < ROWS; row++)
-  {
-    for(col = 0; col < COLUMNS; col++)
-    {
-      if(board[row][col] == 'S')
-      {
-        return 0; //Ship is found
-      }
-    }
-  }
-  return 1; //No ship is found
-}
 
 //returns 0 if the game should continue, 1 if it shouldn't
 int aiLevel1Turn(char userBoard[ROWS][COLUMNS])
@@ -421,4 +385,60 @@ int aiLevel4Turn(char userBoard[ROWS][COLUMNS])
   {
     return 1;
   }
+}
+
+void aiGame(char playerBoard[ROWS][COLUMNS], char aiBoard[ROWS][COLUMNS], int aiLevel)
+{
+  printf("Test");
+  int turns = 0;
+  int output = 0;
+  int aiRow = -1;
+  int aiColumn = -1;
+  int directionSearch = -1;
+  while(output == 0)
+  {
+    turns += 1;
+    if(turns % 2 == 1)
+    {
+      output = ask_fire(aiBoard);
+    }
+    else
+    {
+      switch(aiLevel)
+      {
+      case 2:
+        output = aiLevel1Turn(playerBoard);
+        break;
+      case 3:
+        output = aiLevel2Turn(playerBoard, &aiRow, &aiColumn, &directionSearch);
+        break;
+      case 4:
+        output = aiLevel3Turn(playerBoard, &aiRow, &aiColumn);
+        break;
+      case 5:
+        output = aiLevel4Turn(playerBoard);
+        break;
+      case 6:
+        output = aiLevel4Turn(playerBoard);
+        break;
+      }
+    }
+  }
+  if(output == 1)
+  {
+    switch(turns % 2)
+    {
+    case 0:
+      printf("AI Wins\n");
+      break;
+    case 1:
+      printf("Player 1 Wins\n");
+      break;
+    }
+  }
+  else
+  {
+    printf("Error: Invalid Outcome");
+  }
+
 }
