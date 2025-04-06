@@ -21,7 +21,7 @@ int aiShipPlacement(int currentShipSize, char array[ROWS][COLUMNS]);
 int shipPlacement(int currentShipSize, char array[ROWS][COLUMNS]);
 int fullPlacementLoop(char array[ROWS][COLUMNS]);
 int aiPlacementLoop(char array[ROWS][COLUMNS]);
-void creatArray(char array[ROWS][COLUMNS]);
+void createArray(char array[ROWS][COLUMNS]);
 
 #define MAX_BUFFER_SIZE 1024
 
