@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include "battleShipPlacement.h"
 #include "fire_input.h"
+#include "aiLevels.h"
 
 #define COLUMNS 10
 #define ROWS 10
