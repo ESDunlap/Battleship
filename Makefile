@@ -3,7 +3,7 @@ CFLAGS =
 
 TARGET = Battleship
 
-SRC = game_manager.c battleShipPlacement.c board_prints.c fire_shot.c fire_input.c
+SRC = game_manager.c battleShipPlacement.c board_prints.c fire_shot.c fire_input.c aiLevels.c
 
 OBJ = $(SRC:.c=.o)
 
