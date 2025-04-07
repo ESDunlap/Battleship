@@ -422,7 +422,7 @@ void aiGame(char playerBoard[ROWS][COLUMNS], char aiBoard[ROWS][COLUMNS], int ai
         output = aiLevel4Turn(playerBoard);
         break;
       }
-      print_board(1, 0, playerBoard)
+      print_board(1, 0, playerBoard);
     }
   }
   if(output == 1)
