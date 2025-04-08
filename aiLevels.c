@@ -381,7 +381,6 @@ int aiLevel4Turn(char userBoard[ROWS][COLUMNS])
 
 void aiGame(char playerBoard[ROWS][COLUMNS], char aiBoard[ROWS][COLUMNS], int aiLevel)
 {
-  printf("Test");
   int turns = 0;
   int output = 0;
   int aiRow = -1;
@@ -392,10 +391,18 @@ void aiGame(char playerBoard[ROWS][COLUMNS], char aiBoard[ROWS][COLUMNS], int ai
     turns += 1;
     if(turns % 2 == 1)
     {
+      printf("\033[0;32m");
+      printf("Your Turn\n\n");
+      printf("\033[0;31m");
+      print_board(-2, 0, aiBoard);
       output = ask_fire(aiBoard);
+      clearScreen();
     }
     else
     {
+      printf("\033[0;32m");
+      printf("AI Turn\n\n");
+      printf("\033[0;31m");
       switch(aiLevel)
       {
       case 2:
@@ -408,13 +415,11 @@ void aiGame(char playerBoard[ROWS][COLUMNS], char aiBoard[ROWS][COLUMNS], int ai
         output = aiLevel3Turn(playerBoard, &aiRow, &aiColumn);
         break;
       case 5:
-        output = aiLevel4Turn(playerBoard);
-        break;
       case 6:
         output = aiLevel4Turn(playerBoard);
         break;
       }
-      print_board(1, 0, playerBoard);
+      print_board(2, 1, playerBoard);
     }
   }
   if(output == 1)
@@ -425,7 +430,7 @@ void aiGame(char playerBoard[ROWS][COLUMNS], char aiBoard[ROWS][COLUMNS], int ai
       printf("AI Wins\n");
       break;
     case 1:
-      printf("Player 1 Wins\n");
+      printf("You Win!\n");
       break;
     }
   }
