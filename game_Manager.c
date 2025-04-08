@@ -1,8 +1,5 @@
 #include "game_manager.h"
 
-//#define COLUMNS 10
-//#define ROWS 10
-
 /*
 	File: game_manager.c
 	Authors: Kaeden Daly, Erik Dunlap
@@ -19,7 +16,7 @@ int main()
   
   //start:
   
-  int difficulty = 1;
+  int difficulty;
   printf("Please choose difficulty\n\n");
   printf("Type \"1\" for Player vs Player\n");
   printf("Type \"2\" for Easy AI\n"); //Completely Random
@@ -45,6 +42,7 @@ int main()
   switch(difficulty)
   {
     case 1:
+    {
     	createArray(player1);
 			createArray(player2);
 			
@@ -56,8 +54,41 @@ int main()
       
       game(player1, player2);
       break;
+    }
     case 2:
+    {
+    }
+    case 3:
+    {
+    }
+    case 4:
+    {
+    }
+    case 5:
+    {
+    	createArray(player1);
+			createArray(ai);
+			
+      printf("Player 1: ");
+      fullPlacementLoop(player1);
+      aiPlacementLoop(ai);
+      
+      aiGame(player1, ai, difficulty);
       break;
+    }
+    case 6:
+    {
+    	createArray(player1);
+			createArray(ai);
+			
+      printf("Player 1: \n\n");
+      fullPlacementLoop(player1);
+      aiPlacementLoop(ai);
+      
+      aiLevel4Turn(player1);
+      aiGame(player1, ai, difficulty);
+      break;
+    }
   }
   
   

@@ -5,6 +5,7 @@
 
 #include <stdio.h>
 #include "fire_shot.h"
+#include "board_prints.h"
 #include "battleShipPlacement.h"
 
 #define COLUMNS 10

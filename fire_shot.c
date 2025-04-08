@@ -1,8 +1,5 @@
 #include "fire_shot.h"
 
-//#define COLUMNS 10
-//#define ROWS 10
-
 /*
 	File: fire_shot.c
 	Author: Kaeden Daly

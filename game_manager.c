@@ -1,8 +1,5 @@
 #include "game_manager.h"
 
-//#define COLUMNS 10
-//#define ROWS 10
-
 /*
 	File: game_manager.c
 	Authors: Kaeden Daly, Erik Dunlap

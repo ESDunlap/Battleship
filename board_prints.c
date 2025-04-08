@@ -1,8 +1,5 @@
 #include "board_prints.h"
 
-//#define COLUMNS 10
-//#define ROWS 10
-
 /*
 	File: board_prints.c
 	Author: Kaeden Daly
@@ -12,18 +9,30 @@
 	References: Google
 */
 
-//
+/*
+  choice: What the owner of the board is
+  safety: 0 is safe and hides ships, 1 is unsafe and shows ships
+  boards: The boards for the players
+*/
+
+//Will print one board
 int print_board(int choice, int safety, char board[ROWS][COLUMNS])
 {
   switch(choice)
   {
   case 0:
     break;
+  case 2:
+    printf("Players board: \n");
+    break;
   case 1:
     printf("Player 1's board: \n");
     break;
   case -1:
     printf("Player 2's board: \n");
+    break;
+  case -2:
+    printf("AI's board: \n");
     break;
   }
   int row, col;
@@ -79,6 +88,7 @@ int print_board(int choice, int safety, char board[ROWS][COLUMNS])
 	return 0;
 }
 
+//Will print both boards
 int print_boards(int difficulty, int safety, char board_1[ROWS][COLUMNS], char board_2[ROWS][COLUMNS])
 {
   print_board(difficulty, safety, board_1);

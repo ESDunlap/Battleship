@@ -1,13 +1,5 @@
 #include "aiLevels.h"
 
-#include <ctype.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <time.h>
-#include <unistd.h>
-#define COLUMNS 10
-#define ROWS 10
-
 /*
 	File: aiLevels.c
 	Author: Erik Dunlap and Kaeden Daly

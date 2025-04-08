@@ -1,8 +1,5 @@
 #include "fire_input.h"
 
-//#define COLUMNS 10
-//#define ROWS 10
-
 /*
 	File: fire_input.c
 	Author: Kaeden Daly
@@ -18,9 +15,9 @@ int ask_fire(char board[ROWS][COLUMNS])
   int row, col;
   fail_fire:
   printf("Type the row to fire at: ");
-  //row = ValidIntInput();
+  row = validIntInput() - 1;
   printf("Type the column to fire at: ");
-  //col = ValidColInput();
+  col = validColInput();
   
   int output;
   output = fire_and_check(row, col, board);
@@ -43,10 +40,14 @@ void game(char board1[ROWS][COLUMNS], char board2[ROWS][COLUMNS])
     printf("\n\n\n");
     if(turns % 2 == 1)
     {
+      printf("Player 1's Turn\n\n");
+      print_board(-1, 0, board2);
       output = ask_fire(board2);
     }
     else
     {
+      printf("Player 2's Turn\n\n");
+      print_board(1, 0, board1);
       output = ask_fire(board1);
     }
   }
@@ -61,6 +62,7 @@ void game(char board1[ROWS][COLUMNS], char board2[ROWS][COLUMNS])
       printf("Player 1 Wins\n");
       break;
     }
+    print_boards(1, 1, board1, board2);
   }
   else
   {
