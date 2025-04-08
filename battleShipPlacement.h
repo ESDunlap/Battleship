@@ -26,3 +26,10 @@ void createArray(char array[ROWS][COLUMNS]);
 #define MAX_BUFFER_SIZE 1024
 
 #endif
+
+#ifdef _WIN32
+#include <conio.h>
+#else
+#include <stdio.h>
+#define clearScreen() printf("\e[1;1H\e[2J")
+#endif

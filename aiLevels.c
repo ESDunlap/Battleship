@@ -17,8 +17,8 @@ int aiLevel1Turn(char userBoard[ROWS][COLUMNS])
   int currentStatus;
   while(1)
   {
-    selectedRow= rand()%10;
-    selectedColumn= rand()%10;
+    selectedRow= rand()%ROWS;
+    selectedColumn= rand()%COLUMNS;
     currentStatus= fire_and_check(selectedRow, selectedColumn, userBoard);
     if (currentStatus== 0)
     {
@@ -219,8 +219,8 @@ int aiLevel2Turn(char userBoard[ROWS][COLUMNS], int* searchRow, int* searchColum
 
   while(1)
   {
-    selectedRow= rand()%10;
-    selectedColumn= rand()%10;
+    selectedRow= rand()%ROWS;
+    selectedColumn= rand()%COLUMNS;
     currentStatus= fire_and_check(selectedRow, selectedColumn, userBoard);
     if (currentStatus== 0)
     {
@@ -326,8 +326,8 @@ int aiLevel3Turn(char userBoard[ROWS][COLUMNS], int* searchRow, int* searchColum
 
   while(1)
   {
-    selectedRow= rand()%10;
-    selectedColumn= rand()%10;
+    selectedRow= rand()%ROWS;
+    selectedColumn= rand()%COLUMNS;
     currentStatus= fire_and_check(selectedRow, selectedColumn, userBoard);
     if (currentStatus== 0)
     {
@@ -385,7 +385,7 @@ void aiGame(char playerBoard[ROWS][COLUMNS], char aiBoard[ROWS][COLUMNS], int ai
   int output = 0;
   int aiRow = -1;
   int aiColumn = -1;
-  int directionSearch = -1;
+  int directionSearch = 0;
   while(output == 0)
   {
     turns += 1;

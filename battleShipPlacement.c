@@ -9,12 +9,6 @@
 	References: N/A
 */
 
-void clearScreen()
-{
-  const char *CLEAR_SCREEN_ANSI = "\e[1;1H\e[2J";
-  write(STDOUT_FILENO, CLEAR_SCREEN_ANSI, 12);
-}
-
 int validIntInput()
 {
     int userInput;
@@ -121,7 +115,7 @@ int shipPlacement(int currentShipSize, char array[ROWS][COLUMNS])
         validPlacement=1;
         do
         {
-            printf("Which row to start?\n");
+            printf("Which row?\n");
             selectedRow= validIntInput() - 1;
             if (selectedRow > ROWS-1 || selectedRow < 0)
             {
@@ -131,7 +125,7 @@ int shipPlacement(int currentShipSize, char array[ROWS][COLUMNS])
         while (selectedRow > ROWS-1 || selectedRow < 0);
         do
         {
-            printf("Which column?\n");
+            printf("\nWhich column?\n");
             selectedColumn= validColInput();
             if (selectedColumn > COLUMNS-1 || selectedColumn < 0)
             {
@@ -141,7 +135,7 @@ int shipPlacement(int currentShipSize, char array[ROWS][COLUMNS])
         while (selectedColumn > COLUMNS-1 || selectedColumn < 0);
         do
         {
-            printf("Which direction?\n(1 for horizontal)\n(2 for vertical)\n");
+            printf("\nWhich direction?\n(1 for horizontal)\n(2 for vertical)\n");
             directionVar= validIntInput();
             if (directionVar > 2 || directionVar < 1)
             {
@@ -240,9 +234,9 @@ int aiPlacementLoop(char array[ROWS][COLUMNS])
 void createArray(char array[ROWS][COLUMNS])
 {
     int row, col;
-    for (row=0; row < 10; row++)
+    for (row = 0; row < ROWS; row++)
     {
-        for(col=0; col < 10; col++)
+        for(col = 0; col < COLUMNS; col++)
         {
             array[row][col] = 'W';
         }

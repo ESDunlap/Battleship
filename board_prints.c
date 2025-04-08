@@ -23,7 +23,7 @@ int print_board(int choice, int safety, char board[ROWS][COLUMNS])
   case 0:
     break;
   case 2:
-    printf("Players board: \n");
+    printf("Player's board: \n");
     break;
   case 1:
     printf("Player 1's board: \n");
@@ -35,6 +35,7 @@ int print_board(int choice, int safety, char board[ROWS][COLUMNS])
     printf("AI's board: \n");
     break;
   }
+  printf("\033[0m");
   int row, col;
   printf("   - A ");
   for(col = 1; col < COLUMNS; col++)

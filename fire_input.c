@@ -37,19 +37,27 @@ void game(char board1[ROWS][COLUMNS], char board2[ROWS][COLUMNS])
   while(output == 0)
   {
     turns++;
-    printf("\n\n\n");
     if(turns % 2 == 1)
     {
+      printf("\033[0;32m");
       printf("Player 1's Turn\n\n");
+      printf("\033[0;31m");
       print_board(-1, 0, board2);
       output = ask_fire(board2);
+      printf("\033[0;31m");
+      print_board(-1, 0, board2);
     }
     else
     {
+      printf("\033[0;32m");
       printf("Player 2's Turn\n\n");
+      printf("\033[0;31m");
       print_board(1, 0, board1);
       output = ask_fire(board1);
+      printf("\033[0;31m");
+      print_board(1, 0, board1);
     }
+    printf("\n\n\n");
   }
   if(output == 1)
   {
